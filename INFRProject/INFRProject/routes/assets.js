@@ -8,7 +8,7 @@ router.get('/add', (req, res) => {
   res.render('addAsset', { title: 'Add New Asset' });
 });
 
-
+// Route to handle form submission for adding a new asset
 router.post('/add', async (req, res) => {
   try {
     const { name, category, serialNumber, purchaseDate, status, notes } = req.body;
