@@ -1,7 +1,2 @@
 ./node_modules
 .env
-./lookupAsset
-./support
-./test
-./error
-.server.js
