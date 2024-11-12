@@ -1,0 +1,62 @@
+<%- include('Partials/header') %>
+
+<main class="inventory-list">
+    <h2>All Assets in Inventory</h2>
+    <% if (assets.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Asset Name</th>
+                    <th>Category</th>
+                    <th>Serial Number</th>
+                    <th>Purchase Date</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% assets.forEach(asset => { %>
+                    <tr>
+                        <td><%= asset.name %></td>
+                        <td><%= asset.category %></td>
+                        <td><%= asset.serialNumber %></td>
+                        <td><%= asset.purchaseDate ? asset.purchaseDate.toDateString() : 'N/A' %></td>
+                        <td><%= asset.status %></td>
+                        <td><%= asset.notes || 'N/A' %></td>
+                        <td>
+                            <a href="/assets/edit/<%= asset._id %>">Edit</a>
+                            <!-- You can add a delete option here -->
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No assets found in the inventory.</p>
+    <% } %>
+</main>
+
+<%- include('Partials/footer') %>
+
+<style>
+    .inventory-list {
+        padding: 30px;
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+    }
+</style>

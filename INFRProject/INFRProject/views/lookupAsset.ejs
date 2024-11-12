@@ -1,0 +1,13 @@
+<%- include('Partials/header') %>
+<main>
+    <h2>Lookup Asset</h2>
+    <form action="/assets/lookup" method="POST">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" name="serialNumber" id="serialNumber" required><br>
+        <button type="submit">Search</button>
+    </form>
+    <% if (message) { %>
+        <p style="color: red;"><%= message %></p>
+    <% } %>
+</main>
+<%- include('Partials/footer') %>

@@ -1,0 +1,12 @@
+<%- include('Partials/header') %>
+<main>
+    <h2>Asset Details</h2>
+    <p><strong>Asset Name:</strong> <%= asset.name %></p>
+    <p><strong>Category:</strong> <%= asset.category %></p>
+    <p><strong>Serial Number:</strong> <%= asset.serialNumber %></p>
+    <p><strong>Purchase Date:</strong> <%= asset.purchaseDate ? asset.purchaseDate.toISOString().slice(0, 10) : 'N/A' %></p>
+    <p><strong>Status:</strong> <%= asset.status %></p>
+    <p><strong>Notes:</strong> <%= asset.notes %></p>
+    <a href="/assets/edit/<%= asset._id %>">Edit Asset</a>
+</main>
+<%- include('Partials/footer') %>
