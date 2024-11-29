@@ -1,0 +1,10 @@
+<%- include('Partials/header') %>
+<main class="dashboard-container">
+  <h1>Welcome, <%= session.user.username %></h1>
+  <div class="options">
+    <a href="/assets/add">Add New Asset</a>
+    <a href="/assets/check">Check Inventory</a>
+    <a href="/auth/logout">Logout</a>
+  </div>
+</main>
+<%- include('Partials/footer') %>

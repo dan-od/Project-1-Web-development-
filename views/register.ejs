@@ -1,0 +1,18 @@
+<body class="register-page">
+<%- include('Partials/header') %>
+<main class="page-container">
+  <div class="form-container">
+    <h1>Register</h1>
+    <form action="/auth/register" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required>
+      <button type="submit" class="btn btn-submit">Register</button>
+    </form>
+  </div>
+</main>
+<%- include('Partials/footer') %>
+</body>
