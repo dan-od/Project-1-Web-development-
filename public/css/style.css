@@ -1,0 +1,443 @@
+.home-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: calc(100vh - 60px); /* Full height minus header/footer */
+    text-align: center;
+    flex-direction: column; /* Stack the title and buttons vertically */
+}
+
+.home-content {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    color: white; /* Ensure the text is visible */
+}
+
+.brand-title {
+    font-size: 36px; /* Larger title size */
+    font-weight: bold;
+    margin-bottom: 20px; /* Add spacing below the title */
+    color: #ffffff;
+}
+
+body.home-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/logo.jpg'); /* Replace with the correct image path */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9); /* Optional dimming for readability */
+    z-index: -1; /* Ensure the background stays behind all content */
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: 20px; /* Add spacing between buttons and the title */
+}
+
+.service-button {
+    padding: 15px 30px;
+    background-color: #e63946; /* Red button background */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.service-button:hover {
+    background-color: #d62839; /* Darker red on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+
+.inventory-list {
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px); /* Add blur for a sleek effect */
+}
+
+.inventory-list h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border-radius: 10px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure rounded corners apply to content */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    color: #2c3e50; /* Dark text for contrast */
+}
+
+th {
+    background-color: rgba(44, 62, 80, 0.9); /* Semi-transparent dark header */
+    color: #ecf0f1; /* Light text for headers */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque rows */
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(245, 245, 245, 0.9); /* Alternate row styling */
+}
+
+td {
+    color: #333; /* Darker text color for readability */
+}
+
+.add-inventory-container .content-overlay {
+    position: relative;
+    width: 450px; /* Increased width */
+    margin-left: 20px;
+    background: rgba(255, 255, 255, 0.85); /* Slightly transparent background */
+    padding: 25px; /* Adjust padding for better spacing */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-inventory-form .form-group label {
+    font-size: 16px; /* Larger label font size */
+    font-weight: bold;
+    color: #333; /* Darker text color */
+}
+
+.add-inventory-form input,
+.add-inventory-form select,
+.add-inventory-form textarea {
+    background: rgba(255, 255, 255, 0.9); /* Increase transparency */
+    color: #333; /* Dark text color */
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Submit button styling */
+.add-inventory-form button {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-inventory-form button:hover {
+    background-color: #1a252f;
+}
+
+.header-logo {
+    height: 40px; /* Adjust height for appropriate size */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add some spacing between the logo and the text */
+    border-radius: 4px; /* Optional rounded corners */
+}
+
+/* General body and layout styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: #333;
+}
+
+/* Ensure full height for body and HTML */
+html, body {
+    height: 100%;
+}
+
+/* Default background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.8); /* Slight dimming for better text readability */
+    z-index: -1; /* Place behind everything */
+}
+
+/* Main container for page content */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+/* Styling for transparent forms */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); /* Blur background behind the form */
+}
+
+/* Footer styling */
+.footer {
+    background-color: #2c3e50; /* Dark background to match your theme */
+    color: #ecf0f1; /* Light text color */
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Specific page backgrounds (overrides default) */
+body.register-page::before {
+    background-image: url('/images/back1.jpg');
+}
+
+body.login-page::before {
+    background-image: url('/images/back2.jpg');
+}
+
+body.add-inventory-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/back7.jpg'); /* Path to the JJD logo image */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9); /* Slight dimming for text readability */
+    z-index: -1; /* Ensure it is behind content */
+}
+
+body.lookup-page::before {
+    background-image: url('/images/back.jpg');
+}
+
+body.dashboard-page::before {
+    background-image: url('/images/back4.jpg');
+}
+
+/* Header styling */
+header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #ecf0f1;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+/* Buttons and input styling */
+button, input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2980b9; /* Darker hover effect */
+}
+
+/* Login/Register Form Fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+}
+
+/* Buttons */
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #2980b9;
+}
+
+/* Add Inventory Page Specific */
+.add-inventory-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: flex-start; /* Align form to the left */
+    align-items: center;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.8); /* Dim the background for better text contrast */
+    z-index: 1;
+}
+
+.content-overlay {
+    position: relative;
+    width: 450px; /* Adjust width for better spacing */
+    margin-left: 20px;
+    background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+    padding: 25px; /* Adjust padding for spacing */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2; /* Ensure it stays above the background */
+}
+
+/* Title styling */
+.content-overlay .title {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* General login container styling */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg'); /* Use your background image */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+/* Logo styling */
+.logo-container {
+    text-align: center;
+    margin-bottom: 30px; /* Add more space between logo and form */
+}
+
+.login-icon {
+    font-size: 80px; /* Bigger logo size */
+    color: #ffffff; /* White logo color */
+}
+
+.brand-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    text-align: center;
+    margin-bottom: 20px; /* Add spacing below the title */
+}
+
+
+/* Form box styling */
+.login-card {
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    padding: 40px; /* Increase padding for a larger box */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+    width: 100%;
+    max-width: 500px; /* Increase width for a larger form */
+}
+
+.login-header {
+    font-size: 36px; /* Bigger Login text */
+    color: #333; /* Dark text color */
+    margin-bottom: 25px; /* Add space below the header */
+    text-align: center;
+}
+
+/* Form input and button styling */
+.login-form .form-group {
+    margin-bottom: 20px; /* Add more space between form fields */
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px; /* Add spacing between label and input */
+    font-weight: bold;
+    font-size: 16px; /* Increase label font size */
+    color: #555;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 15px; /* Larger input padding for bigger fields */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Slightly more rounded inputs */
+    font-size: 16px; /* Bigger input font size */
+    margin-bottom: 15px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px; /* Bigger button */
+    background-color: #3498db;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px; /* Bigger button text */
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #2980b9;
+}

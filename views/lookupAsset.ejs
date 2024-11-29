@@ -1,0 +1,19 @@
+<%- include('Partials/header') %>
+<main>
+    <h2>Lookup Asset</h2>
+    <form action="/lookup" method="POST">
+    <label for="serialNumber">Serial Number:</label>
+    <input type="text" id="serialNumber" name="serialNumber" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" />
+
+    <button type="submit">Lookup</button>
+    </form>
+    <% if (message) { %>
+    <p style="color: rgb(230, 12, 12);"><%= message %></p>
+    <% } %>
+    </main>
+<%- include('Partials/footer') %>
+
+
