@@ -4,7 +4,9 @@ const path = require('path');
 const app = express();
 const authRoutes = require('./auth/auth'); // Correct path to auth.js
 const assetRoutes = require('./routes/assets'); // Correct path to assets.js
+const generalRoutes = require('./routes/team');
 require('dotenv').config();
+app.use('/', generalRoutes);
 
 app.use(
   session({
@@ -16,6 +18,7 @@ app.use(
     },
   })
 );
+
 
 // Set up view engine and public directory
 app.set('view engine', 'ejs');
@@ -39,16 +42,16 @@ app.get('/', (req, res) => {
 });
 
 // Error Handling Middleware
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || 'Something went wrong';
+  res.status(status).render('error', { title: 'Error', message, error: err });
+});
+
+// Catch-all 404 route
 app.use((req, res) => {
-  res.status(404).render('error', { title: 'Error', message: 'Page Not Found' });
+  res.status(404).render('error', { title: 'Error', message: 'Page Not Found', error: {} });
 });
 
-app.get('/team', (req, res) => {
-  res.render('team'); // Render the team.ejs page
-});
-
-app.get('/demonstration', (req, res) => {
-  res.render('demonstration'); // Render the demonstration.ejs page
-});
 
 module.exports = app;
