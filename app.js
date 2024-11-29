@@ -43,4 +43,12 @@ app.use((req, res) => {
   res.status(404).render('error', { title: 'Error', message: 'Page Not Found' });
 });
 
+app.get('/team', (req, res) => {
+  res.render('team'); // Render the team.ejs page
+});
+
+app.get('/demonstration', (req, res) => {
+  res.render('demonstration'); // Render the demonstration.ejs page
+});
+
 module.exports = app;

@@ -1,0 +1,59 @@
+<%- include('Partials/header') %>
+<body>
+  <header>
+    <h1>Team Overview</h1>
+  </header>
+  <main>
+    <!-- Team Name and Logo -->
+    <section>
+      <img src="/images/team-logo.jpg" alt="Team Logo" />
+      <h2>Team Name: XYZ Innovators</h2>
+    </section>
+
+    <!-- Team Members -->
+    <section>
+      <h3>Team Members</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>123456</td>
+            <td>Frontend Developer</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>654321</td>
+            <td>Backend Developer</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Mugshots -->
+    <section>
+      <h3>Team Mugshots</h3>
+      <div class="team-mugshots">
+        <div>
+          <img src="/images/john.jpg" alt="John Doe" />
+          <p>John Doe - Frontend Developer</p>
+        </div>
+        <div>
+          <img src="/images/jane.jpg" alt="Jane Smith" />
+          <p>Jane Smith - Backend Developer</p>
+        </div>
+        <div>
+          <img src="/images/jane.jpg" alt="Jane Smith" />
+          <p>Jane Smith - Backend Developer</p>
+        </div> 
+      </div>
+    </section>
+  </main>
+</body>
+ <%- include('Partials/footer') %>
