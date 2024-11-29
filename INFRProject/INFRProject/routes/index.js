@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Asset = require('../models/asset'); // Import the Asset model for consistency
+const jwt = require('jsonwebtoken');
 
 // Route for the home page
 router.get('/', (req, res) => {
@@ -26,5 +27,8 @@ router.get('/assets/check', async (req, res) => {
     res.render('error', { title: 'Error', message: error.message, error });
   }
 });
+
+router.use('/auth', require('./auth'));
+router.use('/assets', require('./assets'));
 
 module.exports = router;

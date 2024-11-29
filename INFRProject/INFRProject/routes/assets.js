@@ -1,64 +1,57 @@
-// routes/assets.js
 const express = require('express');
 const router = express.Router();
-const Asset = require('../models/asset'); // Import the Asset model
+const Asset = require('../models/asset'); // Model for asset
+const jwt = require('jsonwebtoken');
 
-// Route to render the form for adding a new asset
-router.get('/add', (req, res) => {
+// Middleware to check if user is authenticated
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.token) {
+    try {
+      const decoded = jwt.verify(req.session.token, process.env.SESSION_KEY);
+      console.log("Decoded JWT:", decoded);
+      req.user = decoded; // Attach user data to the request object
+      return next();
+    } catch (error) {
+      console.error("Invalid JWT:", error.message);
+    }
+  }
+  res.redirect('/auth/login'); // Redirect to login if not authenticated
+};
+
+// Route for landing page (/assets)
+router.get('/', isAuthenticated, (req, res) => {
+  res.redirect('/assets/check'); // Redirect to inventory check or main page
+});
+
+// Route for assets overview (protected)
+router.get('/assets', isAuthenticated, (req, res) => {
+  res.render('assets', { title: 'Assets' });
+});
+
+// Route to render the form for adding a new asset (protected)
+router.get('/add', isAuthenticated, (req, res) => {
   res.render('addAsset', { title: 'Add New Asset' });
 });
 
-// Route to handle form submission for adding a new asset
-router.post('/add', async (req, res) => {
+// Route to handle adding a new asset (protected)
+router.post('/add', isAuthenticated, async (req, res) => {
   try {
     const { name, category, serialNumber, purchaseDate, status, notes } = req.body;
 
-    // Validate required fields
     if (!name || !category || !status) {
       throw new Error('Name, Category, and Status are required.');
     }
 
-    const newAsset = new Asset({
-      name,
-      category,
-      serialNumber,
-      purchaseDate,
-      status,
-      notes
-    });
-
+    const newAsset = new Asset({ name, category, serialNumber, purchaseDate, status, notes });
     await newAsset.save();
-    res.redirect('/assets/check'); // Redirect to check inventory
+    res.redirect('/assets/check');
   } catch (error) {
-    res.render('error', { title: 'Error', message: error.message, error });
+    res.render('error', { title: 'Error', message: error.message });
   }
 });
 
-// Route to render the form for looking up an asset
-router.get('/lookup', (req, res) => {
-  res.render('lookupAsset', { title: 'Lookup Asset', message: null });
-});
-
-// Route to handle lookup functionality
-router.post('/lookup', async (req, res) => {
-  try {
-    const { serialNumber } = req.body;
-
-    // Search for the asset by serial number
-    const asset = await Asset.findOne({ serialNumber });
-
-    if (!asset) {
-      res.render('lookupAsset', { title: 'Lookup Asset', message: 'No result found for this serial number', asset: null });
-    } else {
-      res.render('assetDetails', { title: 'Asset Details', asset });
-    }
-  } catch (error) {
-    res.render('error', { title: 'Error', message: error.message, error });
-  }
-});
-
-// Route to render the edit form for an asset
-router.get('/edit/:id', async (req, res) => {
+// Route to render the form for editing an asset (protected)
+router.get('/edit/:id', isAuthenticated, async (req, res) => {
   try {
     const asset = await Asset.findById(req.params.id);
     if (!asset) {
@@ -66,12 +59,12 @@ router.get('/edit/:id', async (req, res) => {
     }
     res.render('editAsset', { title: 'Edit Asset', asset });
   } catch (error) {
-    res.render('error', { title: 'Error', message: error.message, error });
+    res.render('error', { title: 'Error', message: error.message });
   }
 });
 
-// Route to handle editing an asset
-router.post('/edit/:id', async (req, res) => {
+// Route to handle editing an asset (protected)
+router.post('/edit/:id', isAuthenticated, async (req, res) => {
   try {
     const { name, category, serialNumber, purchaseDate, status, notes } = req.body;
 
@@ -81,23 +74,66 @@ router.post('/edit/:id', async (req, res) => {
       serialNumber,
       purchaseDate,
       status,
-      notes
+      notes,
     });
 
-    res.redirect('/assets/check'); // Redirect to assets list
+    res.redirect('/assets/check'); // Redirect to asset list
   } catch (error) {
-    res.render('error', { title: 'Error', message: error.message, error });
+    res.render('error', { title: 'Error', message: error.message });
   }
 });
 
-// Route for checking inventory (/assets/check)
-router.get('/check', async (req, res) => {
+// Route to handle deleting an asset (protected)
+router.post('/delete/:id', isAuthenticated, async (req, res) => {
+  try {
+    await Asset.findByIdAndDelete(req.params.id);
+    res.redirect('/assets/check');
+  } catch (error) {
+    res.render('error', { title: 'Error', message: error.message });
+  }
+});
+
+// Route to render inventory check (protected)
+router.get('/check', isAuthenticated, async (req, res) => {
   try {
     const assets = await Asset.find(); // Fetch all assets from the database
     res.render('checkInventory', { title: 'Check Inventory', assets });
   } catch (error) {
+    res.render('error', { title: 'Error', message: error.message });
+  }
+});
+
+router.get('/lookup', isAuthenticated, (req, res) => {
+  res.redirect('/assets/check'); // Redirect to inventory check or main page
+});
+
+router.post('/lookup', isAuthenticated, async (req, res) => {
+  try {
+    const { serialNumber, name } = req.body;
+
+    // Search for the asset by either serial number or name
+    let query = {};
+    if (serialNumber) {
+      query.serialNumber = serialNumber;
+    } else if (name) {
+      query.name = name;
+    }
+
+    const asset = await Asset.findOne(query);
+
+    if (!asset) {
+      res.render('lookupAsset', {
+        title: 'Lookup Asset',
+        message: 'No result found for the provided details',
+        asset: null,
+      });
+    } else {
+      res.render('assetDetails', { title: 'Asset Details', asset });
+    }
+  } catch (error) {
     res.render('error', { title: 'Error', message: error.message, error });
   }
 });
+
 
 module.exports = router;

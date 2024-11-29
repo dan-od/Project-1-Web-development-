@@ -1,33 +1,46 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const app = express();
-const db = require('./config/db');
+const authRoutes = require('./auth/auth'); // Correct path to auth.js
+const assetRoutes = require('./routes/assets'); // Correct path to assets.js
+require('dotenv').config();
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000, // Session expiry to 1 day
+    },
+  })
+);
+
+// Set up view engine and public directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
-const indexRouter = require('./routes/index');
-const assetsRouter = require('./routes/assets');
-app.use('/', indexRouter);
-app.use('/assets', assetsRouter);
+// Middleware to make session data accessible in views
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
 
+// Use routes
+app.use('/auth', authRoutes); // Authentication routes
+app.use('/assets', assetRoutes); // Asset routes
 
-const testRouter = require('./routes/test');
-app.use('/test', testRouter);
+// Home Route
+app.get('/', (req, res) => {
+  res.render('home', { title: 'Home' });
+});
 
-// Error handler
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    title: 'Error', // Set the title for the error page
-    message: err.message,
-    error: err
-  });
+// Error Handling Middleware
+app.use((req, res) => {
+  res.status(404).render('error', { title: 'Error', message: 'Page Not Found' });
 });
 
 module.exports = app;

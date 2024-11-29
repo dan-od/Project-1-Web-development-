@@ -1,3 +1,4 @@
+<body class="dashboard-page">
 <%- include('Partials/header') %>
 
 <main class="inventory-list">
@@ -26,7 +27,6 @@
                         <td><%= asset.notes || 'N/A' %></td>
                         <td>
                             <a href="/assets/edit/<%= asset._id %>">Edit</a>
-                            <!-- You can add a delete option here -->
                         </td>
                     </tr>
                 <% }) %>
@@ -38,25 +38,4 @@
 </main>
 
 <%- include('Partials/footer') %>
-
-<style>
-    .inventory-list {
-        padding: 30px;
-        max-width: 800px;
-        margin: auto;
-        text-align: center;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-    }
-    th {
-        background-color: #2c3e50;
-        color: #ecf0f1;
-    }
-</style>
+</body>

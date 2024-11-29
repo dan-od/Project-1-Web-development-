@@ -1,56 +1,46 @@
-<%- include('Partials/header') %>
-<main class="add-asset-form">
-    <h2>Add New Asset</h2>
-    <br>
-    <br>
-    <form action="/assets/add" method="POST">
-        <label for="name">Asset Name:</label>
-        <input type="text" name="name" id="name" required><br>
+<body class="add-inventory-page">
+    <%- include('Partials/header') %>
+    <main class="add-asset-form">
+        <div class="add-inventory-container">
+            <!-- Background with JJD logo and text -->
+            <div class="background-image"></div>
 
-        <label for="category">Category:</label>
-        <input type="text" name="category" id="category" required><br>
-
-        <label for="serialNumber">Serial Number:</label>
-        <input type="text" name="serialNumber" id="serialNumber"><br>
-
-        <label for="purchaseDate">Purchase Date:</label>
-        <input type="date" name="purchaseDate" id="purchaseDate"><br>
-
-        <label for="status">Status:</label>
-        <select name="status" id="status" required>
-            <!-- Status options matching the schema values exactly -->
-            <option value="Available">Available</option>
-            <option value="Assigned">Assigned</option>
-            <option value="In Repair">In Repair</option>
-            <option value="Retired">Retired</option>
-        </select><br>
-
-        <label for="notes">Extra Notes:</label>
-        <textarea name="notes" id="notes"></textarea><br>
-
-        <br>
-        <br>
-
-        <button type="submit" class="submit-button">Add Asset</button>
-    </form>
-
-</main>
-<%- include('Partials/footer') %>
-
-<style>
-    .add-asset-form {
-        background-color: #08475c;
-        padding: 30px;
-        border-radius: 8px;
-        color: white;
-        max-width: 500px;
-        margin: auto;
-    }
-    .submit-button {
-        background-color: #e63946;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-    }
-</style>
+            <!-- Transparent overlay for the form -->
+            <div class="content-overlay">
+                <h2 class="title">Add New Asset</h2>
+                <form class="add-inventory-form" action="/assets/add" method="POST">
+                    <div class="form-group">
+                        <label for="asset-name">Asset Name:</label>
+                        <input type="text" id="asset-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" id="category" name="category" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serial-number">Serial Number:</label>
+                        <input type="text" id="serial-number" name="serialNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="purchase-date">Purchase Date:</label>
+                        <input type="date" id="purchase-date" name="purchaseDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="status" name="status" required>
+                            <option value="Available">Available</option>
+                            <option value="Retired">Retired</option>
+                            <option value="In Maintenance">In Maintenance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Extra Notes:</label>
+                        <textarea id="notes" name="notes"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Add Asset</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <%- include('Partials/footer') %>
+</body>

@@ -1,35 +1,11 @@
-<%- include('Partials/header') %>
-<main class="home-container">
-    <img src="\images\logo.jpg" alt="Description" width="300" height="200">
-    <h1 style="color: red;"> <br> <i class="fa-solid fa-building-user"></i> JJD IT Asset Management</h1>
-    <br>
-    <br>
-    <div class="services-container">
-        <a href="/assets/add" class="service-button">Add to Inventory</a>
-        <a href="/assets/lookup" class="service-button">Lookup</a>
-    </div>
-</main>
-<%- include('Partials/footer') %>
-
-<style>
-    .home-container {
-        background-color: #08475c; /* Portfolio color */
-        text-align: center;
-        color: white;
-        padding: 50px;
-    }
-    .services-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
-    .service-button {
-        padding: 15px;
-        background-color: #e63946; /* Portfolio button color */
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-</style>
+<body class="home-page">
+    <%- include('Partials/header') %>
+    <main class="home-container">
+        <h1 class="brand-title">JJD IT Asset Management</h1>
+        <div class="services-container">
+            <a href="/assets/add" class="service-button">Add to Inventory</a>
+            <a href="/assets/lookup" class="service-button">Check Inventory</a>
+        </div>
+    </main>
+    <%- include('Partials/footer') %>
+</body>

@@ -1,5 +1,5 @@
 <%- include('Partials/header') %>
 <h1><%= message %></h1>
-<h2>Status: <%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<h2>Status: <%= error.status || 500 %></h2>
+<pre><%= error.stack || 'No additional details available.' %></pre>
 <%- include('Partials/footer') %>
