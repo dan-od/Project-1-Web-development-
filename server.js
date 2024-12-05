@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use(session({
-  secret: 'your_secret_key',
+  secret: 'session_key',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Set secure to true if using https
